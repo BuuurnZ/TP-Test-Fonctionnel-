@@ -1,0 +1,1 @@
+{"version":1,"defects":{"TaskManagerTest::testAddTask":8,"TaskManagerTest::testRemoveTask":8,"TaskManagerTest::testGetTasks":8,"TaskManagerTest::testGetTask":8,"TaskManagerTest::testRemoveInvalidIndexThrowsException":8,"TaskManagerTest::testGetInvalidIndexThrowsException":8,"TaskManagerTest::testTaskOrderAfterRemoval":8},"times":[]}
