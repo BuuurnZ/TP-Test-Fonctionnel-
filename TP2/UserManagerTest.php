@@ -26,12 +26,6 @@ class UserManagerTest extends TestCase {
         $this->userManager = new UserManager();
     }
 
-    // Enlever la suppression de la table
-    // protected function tearDown(): void {
-    //     // Suppression des données après chaque test
-    //     $this->db->exec("DROP TABLE users");
-    // }
-
     public function testAddUser() {
         $this->userManager->resetTable();
         $this->userManager->addUser("John Doe", "john@example.com");
@@ -98,4 +92,4 @@ class UserManagerTest extends TestCase {
         $this->userManager->removeUser(9999);
     }
 }
-?>
+
