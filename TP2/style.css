@@ -33,3 +33,24 @@ li {
     display: flex;
     justify-content: space-between;
 }
+/* Styles pour la navbar */
+nav {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 20px;
+}
+
+.navbar-links a:hover {
+    text-decoration: underline;
+}
