@@ -3,13 +3,19 @@ class UserManager {
     private PDO $db;
 
     public function __construct() {
-        $dsn = "mysql:host=localhost;dbname=user_management;charset=utf8";
-        $username = "root"; // Modifier si besoin
-        $password = "root"; // Modifier si besoin
+        $dsn = "mysql:host=127.0.0.1;port=8889;dbname=user_management;charset=utf8;port=8889";
+        $username = "root";
+        $password = "root";
+
         $this->db = new PDO($dsn, $username, $password, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
+    }
+
+    public function resetTable(): void {
+        $stmt = $this->db->prepare("DELETE FROM users;ALTER TABLE users AUTO_INCREMENT = 1; ");
+        $stmt->execute();
     }
 
     public function addUser(string $name, string $email): void {
@@ -22,8 +28,15 @@ class UserManager {
     }
 
     public function removeUser(int $id): void {
-        $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+        $user = $this->getUser($id);
+        if($user) {
+            $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->execute(['id' => $id]);
+        }
+        else{
+            throw new InvalidArgumentException("User not found.");
+        }
+
     }
 
     public function getUsers(): array {
@@ -40,8 +53,15 @@ class UserManager {
     }
 
     public function updateUser(int $id, string $name, string $email): void {
-        $stmt = $this->db->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
-        $stmt->execute(['id' => $id, 'name' => $name, 'email' => $email]);
+        $user = $this->getUser($id);
+        if($user) {
+            $stmt = $this->db->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
+            $stmt->execute(['id' => $id, 'name' => $name, 'email' => $email]);
+        }
+        else {
+            throw new InvalidArgumentException("User not found.");
+        }
+
     }
 }
 ?>
